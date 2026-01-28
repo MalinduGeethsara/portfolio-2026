@@ -1,7 +1,7 @@
-import Hero from '../src/components/Hero';
-import Skills from '../src/components/Skills';
-import Projects from '../src/components/Projects';
-import Education from '../src/components/Education';
+import Hero from '../components/Hero';
+import Skills from '../components/Skills';
+import Projects from '../components/Projects';
+import Education from '../components/Education';
 
 export default function Home() {
   return (
