@@ -1,11 +1,21 @@
 @import "tailwindcss";
+
+
 :root {
-  --foreground-rgb: 15, 23, 42;
-  --background-start-rgb: 248, 250, 252;
+  --background: 28 28 32; 
+  --accent: 0 255 153; 
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  background-color: #1c1c22;
+  color: #ffffff;
   scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ff99;
+  border-radius: 10px;
 }
