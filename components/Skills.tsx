@@ -36,7 +36,7 @@ export default function Skills() {
     <section id="skills" className="py-24">
       <div className="flex flex-col gap-4 mb-12">
         <h2 className="text-4xl font-bold text-white">
-          Technical <span className="text-[#00ff99]">Toolkit</span>
+          Technical <span className="text-[#00ff99]">Skills</span>
         </h2>
         <div className="w-20 h-1.5 bg-[#00ff99] rounded-full"></div>
       </div>

@@ -49,7 +49,6 @@ export default function Projects() {
             viewport={{ once: true }}
             className="group relative bg-[#232329] border border-white/10 p-8 rounded-2xl hover:border-[#00ff99]/50 transition-all duration-300 flex flex-col h-full"
           >
-            {/* Icon & Links */}
             <div className="flex justify-between items-center mb-6">
               <FiFolder className="text-4xl text-[#00ff99]" />
               <div className="flex gap-4 text-xl text-white/70">

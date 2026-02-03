@@ -8,7 +8,7 @@ export default function Education() {
       institution: "SLIIT CITY UNI",
       period: "2023 - Present",
       degree: "Undergraduate in Information Technology",
-      location: "Colombo / Walasmulla",
+      location: "Colombo",
       description: "Focusing on Software Engineering, Web Development, and Database Management."
     },
     {
@@ -31,7 +31,7 @@ export default function Education() {
 
       <div className="relative max-w-3xl mx-auto">
         
-        <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-[2px] bg-gradient-to-b from-[#00ff99] to-transparent opacity-20" />
+        <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-linear-to-b from-[#00ff99] to-transparent opacity-20" />
 
         <div className="space-y-12">
           {educationData.map((edu, i) => (
