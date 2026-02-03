@@ -26,29 +26,30 @@ const itemVariants = {
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col md:flex-row items-center justify-between py-32 px-6 overflow-hidden">
+    <section id="home" className="min-h-screen flex flex-col md:flex-row items-center justify-between py-20 md:py-32 px-6 overflow-hidden">
       
       <motion.div 
-        className="md:w-1/2 space-y-6 text-center md:text-left order-2 md:order-1"
+        className="w-full md:w-1/2 space-y-6 text-center md:text-left order-2 md:order-1 mt-8 md:mt-0"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.span variants={itemVariants} className="text-lg tracking-widest uppercase text-white/80">
+        <motion.span variants={itemVariants} className="text-sm md:text-lg tracking-widest uppercase text-white/80">
           Software Developer
         </motion.span>
         
-        <motion.h1 variants={itemVariants} className="text-6xl md:text-8xl font-black leading-tight">
+        {/* RESPONSIVE TEXT SIZING ADDED HERE */}
+        <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl lg:text-8xl font-black leading-tight">
           Hello I'm <br />
           <span className="text-[#00ff99]">Malindu Geethsara</span>
         </motion.h1>
         
-        <motion.p variants={itemVariants} className="text-white/60 text-lg max-w-lg leading-relaxed mx-auto md:mx-0">
+        <motion.p variants={itemVariants} className="text-white/60 text-base md:text-lg max-w-lg leading-relaxed mx-auto md:mx-0">
           I excel at crafting elegant digital experiences and I am proficient in various programming languages and technologies.
         </motion.p>
 
         {/* BUTTONS */}
-        <motion.div variants={itemVariants} className="flex flex-wrap gap-6 items-center justify-center md:justify-start pt-4">
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-center justify-center md:justify-start pt-4">
           <motion.a 
             href="/Malindu_Geethsara_CV.pdf" 
             download
@@ -80,8 +81,8 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <div className="md:w-1/2 flex justify-center md:justify-end order-1 md:order-2 mb-12 md:mb-0">
-        <div className="relative w-72 h-72 md:w-100 md:h-100">
+      <div className="w-full md:w-1/2 flex justify-center md:justify-end order-1 md:order-2 mb-8 md:mb-0">
+        <div className="relative w-64 h-64 md:w-100 md:h-100">
           
           <motion.svg
             className="absolute inset-0 w-full h-full"

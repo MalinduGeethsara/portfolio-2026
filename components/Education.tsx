@@ -21,7 +21,8 @@ export default function Education() {
   ];
 
   return (
-    <section id="education" className="py-24">
+    // Added 'overflow-hidden' to the section class below
+    <section id="education" className="py-24 overflow-hidden">
       <div className="flex flex-col gap-4 mb-16">
         <h2 className="text-4xl font-bold text-white">
           My <span className="text-[#00ff99]">Education</span>
