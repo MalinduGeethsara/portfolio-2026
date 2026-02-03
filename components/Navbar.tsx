@@ -13,9 +13,9 @@ export default function Navbar() {
             <li><a href="#projects" id="projects" className="hover:text-[#00ff99] transition-all ">Projects</a></li>
             <li><a href="#education" id="education" className="hover:text-[#00ff99] transition-all ">Education</a></li>
           </ul>
-          <button className="bg-[#00ff99] text-[#1c1c22] px-6 py-2 rounded-full font-bold hover:bg-[#00e68a] transition-all">
+          {/* <button className="bg-[#00ff99] text-[#1c1c22] px-6 py-2 rounded-full font-bold hover:bg-[#00e68a] transition-all">
             Hire me
-          </button>
+          </button> */}
         </div>
       </div>
     </nav>

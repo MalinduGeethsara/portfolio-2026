@@ -5,7 +5,7 @@ import Education from '../components/Education';
 
 export default function Home() {
   return (
-    <main className="max-w-5xl mx-auto px-6 pb-24">
+    <main className="max-w-7xl mx-auto pb-24">
       <Hero />
       <hr className="border-slate-200" />
       <Skills />
