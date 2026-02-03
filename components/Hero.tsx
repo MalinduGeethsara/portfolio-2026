@@ -38,7 +38,6 @@ export default function Hero() {
           Software Developer
         </motion.span>
         
-        {/* RESPONSIVE TEXT SIZING ADDED HERE */}
         <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl lg:text-8xl font-black leading-tight">
           Hello I'm <br />
           <span className="text-[#00ff99]">Malindu Geethsara</span>
@@ -48,7 +47,6 @@ export default function Hero() {
           I excel at crafting elegant digital experiences and I am proficient in various programming languages and technologies.
         </motion.p>
 
-        {/* BUTTONS */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-center justify-center md:justify-start pt-4">
           <motion.a 
             href="/Malindu_Geethsara_CV.pdf" 
@@ -133,7 +131,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-20"
+        className="hidden md:block absolute bottom-2 left-1/2 transform -translate-x-1/2 z-20"
       >
         <a href="#skills" aria-label="Scroll down">
            <FiArrowDown className="text-3xl text-[#00ff99] animate-bounce" />
