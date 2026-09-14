@@ -16,28 +16,28 @@ if (typeof window !== 'undefined') {
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { 
+  visible: {
     opacity: 1,
-    transition: { 
+    transition: {
       staggerChildren: 0.2,
-      delayChildren: 0.3 
+      delayChildren: 0.3
     }
   }
 };
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
-    transition: { type: "spring" as const, stiffness: 100 } 
+    transition: { type: "spring" as const, stiffness: 100 }
   }
 };
 
 export default function Hero() {
   const ref = useRef(null);
   const scrollTextRef = useRef(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -67,19 +67,14 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="home" className="min-h-screen relative flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
-      
-      {/* Massive Background Scrolling Text */}
-      <div className="absolute top-[30%] md:top-[20%] left-0 w-[300vw] overflow-hidden pointer-events-none z-0 mix-blend-overlay opacity-10">
-        <div ref={scrollTextRef} className="whitespace-nowrap text-[15vw] md:text-[12vw] font-black uppercase text-white tracking-tighter leading-none">
-          SOFTWARE DEVELOPER • CREATIVE CODER • PROBLEM SOLVER • SOFTWARE DEVELOPER • CREATIVE CODER • PROBLEM SOLVER
-        </div>
-      </div>
 
-      <motion.div 
+
+
+      <motion.div
         style={{ y: yPos, opacity, scale }}
         className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between z-10 origin-top pt-12 md:pt-0"
       >
-        <motion.div 
+        <motion.div
           className="w-full md:w-1/2 space-y-6 text-center md:text-left order-2 md:order-1 mt-12 md:mt-0"
           variants={containerVariants}
           initial="hidden"
@@ -88,40 +83,40 @@ export default function Hero() {
           <motion.span variants={itemVariants} className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm md:text-md tracking-widest uppercase text-[#00ff99] font-bold shadow-[0_0_15px_rgba(0,255,153,0.1)]">
             Software Developer
           </motion.span>
-          
+
           <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
             Hello I'm <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400 drop-shadow-[0_0_15px_rgba(0,255,153,0.3)]">
               Malindu Geethsara
             </span>
           </motion.h1>
-          
+
           <motion.p variants={itemVariants} className="text-white/60 text-base md:text-lg max-w-lg leading-relaxed mx-auto md:mx-0">
             Highly adaptable and dedicated developer specializing in building impactful, intuitive applications. Passionate about lifelong professional development and collective effort to produce innovative outcomes.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-center justify-center md:justify-start pt-6">
-            <motion.a 
-              href="/Malindu_Geethsara_CV.pdf" 
+            <motion.a
+              href="/Malindu_Geethsara_CV.pdf"
               download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group relative overflow-hidden border border-[#00ff99] text-[#00ff99] px-8 py-3.5 rounded-full flex items-center gap-2 font-bold transition-all cursor-pointer shadow-[0_0_20px_rgba(0,255,153,0.15)] hover:shadow-[0_0_30px_rgba(0,255,153,0.4)]"
             >
               <span className="absolute inset-0 bg-[#00ff99] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              <span className="relative group-hover:text-black transition-colors duration-300">DOWNLOAD CV</span> 
+              <span className="relative group-hover:text-black transition-colors duration-300">DOWNLOAD CV</span>
               <span className="relative group-hover:text-black transition-colors duration-300 group-hover:translate-y-1 inline-block">↓</span>
             </motion.a>
-            
+
             <div className="flex gap-4">
-              {[ 
+              {[
                 { icon: FaGithub, href: "https://github.com/MalinduGeethsara" },
                 { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/malindu-geethsara" }
               ].map((social, index) => (
-                <motion.a 
+                <motion.a
                   key={index}
-                  href={social.href} 
-                  target="_blank" 
+                  href={social.href}
+                  target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: 10, backgroundColor: "#00ff99", color: "#000" }}
                   whileTap={{ scale: 0.9 }}
@@ -134,11 +129,11 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end order-1 md:order-2 mb-8 md:mb-0 relative">
-          <div className="magnetic relative w-64 h-64 md:w-100 md:h-100 group cursor-none">
-            
+        <div className="w-full md:w-1/2 flex justify-center items-center order-1 md:order-2 mb-12 md:mb-0 relative">
+          <div className="magnetic relative w-[280px] h-[280px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px] group cursor-none">
+
             {/* Ambient Profile Glow */}
-            <div className="absolute inset-0 bg-[#00ff99]/20 blur-[100px] rounded-full mix-blend-screen group-hover:bg-[#00ff99]/40 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-[#00ff99]/20 blur-[40px] rounded-full mix-blend-screen group-hover:bg-[#00ff99]/40 transition-colors duration-500" />
 
             <motion.svg
               className="absolute inset-0 w-full h-full pointer-events-none"
@@ -173,7 +168,7 @@ export default function Hero() {
               </defs>
             </motion.svg>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
@@ -184,16 +179,16 @@ export default function Hero() {
           </div>
         </div>
       </motion.div>
-      
-      <motion.div 
+
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
         className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
       >
         <a href="#skills" aria-label="Scroll down" className="flex flex-col items-center gap-2 group cursor-pointer magnetic">
-           <span className="text-white/30 text-xs tracking-[0.3em] uppercase group-hover:text-[#00ff99] transition-colors">Scroll</span>
-           <FiArrowDown className="text-2xl text-white/30 group-hover:text-[#00ff99] animate-bounce transition-colors" />
+          <span className="text-white/30 text-xs tracking-[0.3em] uppercase group-hover:text-[#00ff99] transition-colors">Scroll</span>
+          <FiArrowDown className="text-2xl text-white/30 group-hover:text-[#00ff99] animate-bounce transition-colors" />
         </a>
       </motion.div>
     </section>

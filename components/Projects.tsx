@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiFolder } from 'react-icons/fi';
+import { FiGithub, FiFolder } from 'react-icons/fi';
 
 export default function Projects() {
   const projects = [
@@ -9,7 +9,6 @@ export default function Projects() {
       status: "Ongoing",
       desc: "System for online booking, integrated payments, real-time SMS notifications, and automated monthly financial reporting.",
       tech: ["React", "Node.js", "MySQL", "Tailwind"],
-      link: "#",
       github: "#"
     },
     {
@@ -17,7 +16,6 @@ export default function Projects() {
       status: "Completed",
       desc: "A full-stack, responsive web application for apparel sales, built to handle product catalog display and user management.",
       tech: ["PHP", "MySQL", "TailwindCSS", "JS"],
-      link: "#",
       github: "#"
     },
     {
@@ -25,7 +23,6 @@ export default function Projects() {
       status: "Completed",
       desc: "Pharmacy Management System built for handling product catalogs and order processing.",
       tech: ["Java", "PHP", "MySQL", "JavaScript"],
-      link: "#",
       github: "#"
     }
   ];
@@ -53,7 +50,6 @@ export default function Projects() {
               <FiFolder className="text-4xl text-[#00ff99]" />
               <div className="flex gap-4 text-xl text-white/70">
                 <a href={project.github} className="hover:text-[#00ff99] transition-colors"><FiGithub /></a>
-                <a href={project.link} className="hover:text-[#00ff99] transition-colors"><FiExternalLink /></a>
               </div>
             </div>
 
