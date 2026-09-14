@@ -36,8 +36,8 @@ export default function Preloader() {
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
               />
             </div>
-            
-            <motion.div 
+
+            <motion.div
               className="text-white/50 tracking-[0.5em] text-sm font-bold uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -47,7 +47,7 @@ export default function Preloader() {
                 animate={{ opacity: [1, 0.3, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
-                Initializing WebGL
+                Hi! Welcome to my portfolio.
               </motion.span>
             </motion.div>
           </div>

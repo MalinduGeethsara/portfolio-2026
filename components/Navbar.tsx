@@ -11,7 +11,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#1c1c22]/80 backdrop-blur-md py-6">
+    <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-5">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <Link href="#home">
           <h1 className="text-3xl font-bold cursor-pointer">
@@ -45,7 +45,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden bg-[#1c1c22] border-b border-white/10 overflow-hidden"
+                className="md:hidden bg-black/40 backdrop-blur-xl border-b border-white/5 overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
             >
                 <ul className="flex flex-col items-center gap-6 py-8 font-medium text-white/90">
                     {['Home', 'Skills', 'Projects', 'Education'].map((item) => (

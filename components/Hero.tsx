@@ -44,9 +44,8 @@ export default function Hero() {
   });
 
   // Parallax exit animations
-  const yPos = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  // Removed yPos and scale because they cause layout shifts that desync the 3D canvas dimensions when scrolling back up
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
 
   // GSAP Background Marquee Scroll Effect
   useEffect(() => {
@@ -71,7 +70,7 @@ export default function Hero() {
 
 
       <motion.div
-        style={{ y: yPos, opacity, scale }}
+        style={{ opacity }}
         className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between z-10 origin-top pt-12 md:pt-0"
       >
         <motion.div

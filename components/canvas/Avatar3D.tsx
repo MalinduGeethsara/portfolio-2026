@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, Suspense } from 'react';
+import { useRef, Suspense, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Sphere, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
@@ -89,6 +89,21 @@ const PersonalAvatar = () => {
 };
 
 export default function Avatar3D() {
+  useEffect(() => {
+    // Force a resize event shortly after mount to ensure the Canvas 
+    // calculates its bounds correctly and centers the 3D object.
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 500);
+    const timer2 = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 1500);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   return (
     <div className="absolute inset-0 w-full h-full z-10 pointer-events-auto">
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
