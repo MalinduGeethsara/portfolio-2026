@@ -49,6 +49,10 @@ export default function MagneticCursor() {
 
   // Hide native cursor completely by injecting global style
   useEffect(() => {
+    if (window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
+
     document.body.style.cursor = 'none';
     const interactiveElements = document.querySelectorAll('a, button, input, textarea');
     interactiveElements.forEach((el) => {
@@ -66,7 +70,7 @@ export default function MagneticCursor() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="hidden md:block fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
         style={{
           x: mouseX,
           y: mouseY,
@@ -75,7 +79,7 @@ export default function MagneticCursor() {
         }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-10 h-10 border border-[#00ff99]/50 rounded-full pointer-events-none z-[9998]"
+        className="hidden md:block fixed top-0 left-0 w-10 h-10 border border-[#00ff99]/50 rounded-full pointer-events-none z-[9998]"
         style={{
           x: cursorX,
           y: cursorY,
