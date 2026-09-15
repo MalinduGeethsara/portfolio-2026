@@ -13,9 +13,9 @@ export default function Home() {
       <Projects />
       <hr className="border-[#00ff99]" />
       <Education />
-      
+
       <footer className="mt-20 pt-10 border-t border-[#00ff99] text-center text-slate-500 text-sm">
-        © {new Date().getFullYear()} Malindu Geethsara. Built with Next.js 16.1.
+        © {new Date().getFullYear()} Malindu Geethsara.
       </footer>
     </main>
   );

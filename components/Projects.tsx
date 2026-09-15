@@ -1,37 +1,55 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiFolder } from 'react-icons/fi';
+import { FiGithub, FiFolder } from 'react-icons/fi';
 
 export default function Projects() {
   const projects = [
     {
       title: "Salon Management System",
-      status: "Ongoing",
+      status: "Completed",
       desc: "System for online booking, integrated payments, real-time SMS notifications, and automated monthly financial reporting.",
       tech: ["React", "Node.js", "MySQL", "Tailwind"],
-      link: "#",
-      github: "#"
+      github: "https://github.com/MalinduGeethsara/saloon-management-system"
     },
     {
       title: "Kings-Clothing-Store",
       status: "Completed",
       desc: "A full-stack, responsive web application for apparel sales, built to handle product catalog display and user management.",
       tech: ["PHP", "MySQL", "TailwindCSS", "JS"],
-      link: "#",
-      github: "#"
+      github: "https://github.com/MalinduGeethsara/KIngs-Clothing-Store"
     },
     {
       title: "MediCare Plus",
       status: "Completed",
       desc: "Pharmacy Management System built for handling product catalogs and order processing.",
       tech: ["Java", "PHP", "MySQL", "JavaScript"],
-      link: "#",
-      github: "#"
+      github: "https://github.com/MalinduGeethsara/Pharmacy-Management-System"
+    },
+    {
+      title: "GT-Shirt E-Commerce",
+      status: "Completed",
+      desc: "E-commerce platform for a T-shirt business, built using PHP, Tailwind CSS, JavaScript, and MySQL.",
+      tech: ["PHP", "TailwindCSS", "JS", "MySQL"],
+      github: "https://github.com/MalinduGeethsara/Project_GT-Shirt-"
+    },
+    {
+      title: "Fuel QR System",
+      status: "Completed",
+      desc: "A QR-code based fuel allocation and tracking system.",
+      tech: ["React", "Node.js", "MongoDB"],
+      github: "https://github.com/MalinduGeethsara/Fuel-QR-System"
+    },
+    {
+      title: "Travel Go",
+      status: "Completed",
+      desc: "A comprehensive travel booking and itinerary planning application.",
+      tech: ["React", "Tailwind CSS", "Firebase"],
+      github: "https://github.com/MalinduGeethsara/travel_go"
     }
   ];
 
   return (
-    <section id="projects" className="py-24">
+    <section id="projects" className="py-24 px-6">
       <div className="flex flex-col gap-4 mb-12">
         <h2 className="text-4xl font-bold text-white">
           Featured <span className="text-[#00ff99]">Projects</span>
@@ -53,7 +71,6 @@ export default function Projects() {
               <FiFolder className="text-4xl text-[#00ff99]" />
               <div className="flex gap-4 text-xl text-white/70">
                 <a href={project.github} className="hover:text-[#00ff99] transition-colors"><FiGithub /></a>
-                <a href={project.link} className="hover:text-[#00ff99] transition-colors"><FiExternalLink /></a>
               </div>
             </div>
 
