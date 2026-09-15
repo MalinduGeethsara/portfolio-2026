@@ -96,7 +96,7 @@ export default function Hero() {
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-center justify-center md:justify-start pt-6">
             <motion.a
-              href="/Malindu_Geethsara_CV.pdf"
+              href="/MALINDU_GEETHSARA_Resume.pdf"
               download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -110,7 +110,7 @@ export default function Hero() {
             <div className="flex gap-4">
               {[
                 { icon: FaGithub, href: "https://github.com/MalinduGeethsara" },
-                { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/malindu-geethsara" }
+                { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/malindu-geethsara-/" }
               ].map((social, index) => (
                 <motion.a
                   key={index}

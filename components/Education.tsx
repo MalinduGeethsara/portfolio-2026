@@ -89,7 +89,7 @@ export default function Education() {
         {/* GSAP ScrollTrigger Line */}
         <div 
           ref={lineRef}
-          className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-[#00ff99] to-teal-900 shadow-[0_0_15px_#00ff99]" 
+          className="absolute left-6 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-[#00ff99] to-teal-900 shadow-[0_0_15px_#00ff99]" 
         />
 
         <div className="space-y-24">
@@ -102,7 +102,7 @@ export default function Education() {
               }`}
             >
               {/* The Timeline Dot */}
-              <div className="timeline-dot absolute left-6 md:left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#0a0a0a] border-4 border-[#00ff99] rounded-full z-10 shadow-[0_0_20px_rgba(0,255,153,0.8)]" />
+              <div className="timeline-dot absolute left-0 md:left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#0a0a0a] border-4 border-[#00ff99] rounded-full z-10 shadow-[0_0_20px_rgba(0,255,153,0.8)]" />
 
               <div className="w-full md:w-[45%] pl-16 md:pl-0">
                 <div className="glass-card p-8 md:p-10 glass border border-white/10 rounded-3xl hover:border-[#00ff99]/50 transition-all duration-500 group relative overflow-hidden">

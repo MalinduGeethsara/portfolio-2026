@@ -13,11 +13,17 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-5">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <Link href="#home">
+        <a 
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
           <h1 className="text-3xl font-bold cursor-pointer">
            Malindu<span className="text-[#00ff99] animate-pulse">.</span>
           </h1>
-        </Link>
+        </a>
         <div className="hidden md:flex items-center gap-10">
           <ul className="flex gap-8 font-medium text-white/90">
             {['Home', 'Skills', 'Projects', 'Education'].map((item) => (
