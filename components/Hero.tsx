@@ -96,7 +96,7 @@ export default function Hero() {
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-center justify-center md:justify-start pt-6">
             <motion.a
-              href="/MALINDU_GEETHSARA_Resume.pdf"
+              href="/MALINDU_GEETHSARA_CV.pdf"
               download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
