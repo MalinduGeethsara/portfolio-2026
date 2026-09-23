@@ -23,27 +23,67 @@ export default function Preloader() {
           className="fixed inset-0 z-[10000] bg-[#0a0a0a] flex items-center justify-center pointer-events-none"
         >
           <div className="flex flex-col items-center justify-center gap-8 w-64 sm:w-80">
-            {/* Minimalist Geometry */}
-            <motion.div
-              className="relative w-16 h-16 mb-2"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+            {/* 3D Solar System Preloader */}
+            <div 
+              className="relative w-64 h-64 flex items-center justify-center mb-6"
+              style={{ perspective: 1000 }}
             >
-              <motion.div 
-                className="absolute inset-0 border border-[#00ff99]/30 rounded-lg rotate-45"
-                animate={{ rotate: [45, 225] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div 
-                className="absolute inset-0 border border-teal-400/50 rounded-lg rotate-[60deg]"
-                animate={{ rotate: [60, -120] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-1.5 h-1.5 bg-[#00ff99] rounded-full shadow-[0_0_10px_#00ff99] animate-pulse" />
+              <div 
+                className="relative w-full h-full flex items-center justify-center"
+                style={{ transformStyle: 'preserve-3d', transform: 'rotateX(70deg)' }}
+              >
+                {/* Sun */}
+                <motion.div 
+                  className="absolute w-8 h-8 bg-gradient-to-br from-yellow-300 to-orange-500 rounded-full shadow-[0_0_30px_rgba(245,158,11,0.8)]"
+                  style={{ transform: 'rotateX(-70deg)' }}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+                {/* 8 Planets */}
+                {[
+                  { radius: 45, color: "#9ca3af", duration: 1.5, size: 4 }, // Mercury
+                  { radius: 65, color: "#fdba74", duration: 2.5, size: 6 }, // Venus
+                  { radius: 90, color: "#60a5fa", duration: 3.5, size: 8 }, // Earth
+                  { radius: 115, color: "#f87171", duration: 5, size: 6 }, // Mars
+                  { radius: 155, color: "#00ff99", duration: 8, size: 14 }, // Jupiter (themed)
+                  { radius: 190, color: "#fef08a", duration: 12, size: 12 }, // Saturn
+                  { radius: 220, color: "#5eead4", duration: 16, size: 10 }, // Uranus
+                  { radius: 250, color: "#3b82f6", duration: 20, size: 10 }, // Neptune
+                ].map((planet, i) => (
+                  <div 
+                    key={i} 
+                    className="absolute border border-white/10 rounded-full" 
+                    style={{ 
+                      width: planet.radius, 
+                      height: planet.radius,
+                      transformStyle: 'preserve-3d' 
+                    }}
+                  >
+                    <motion.div 
+                      className="w-full h-full"
+                      animate={{ rotateZ: 360 }}
+                      transition={{ duration: planet.duration, repeat: Infinity, ease: "linear" }}
+                      style={{ transformStyle: 'preserve-3d' }}
+                    >
+                      <div 
+                        className="absolute rounded-full"
+                        style={{ 
+                          width: planet.size,
+                          height: planet.size,
+                          backgroundColor: planet.color,
+                          boxShadow: `0 0 15px ${planet.color}`,
+                          top: -planet.size / 2,
+                          left: '50%',
+                          marginLeft: -planet.size / 2,
+                          transform: 'rotateX(-70deg)' 
+                        }}
+                      />
+                    </motion.div>
+                  </div>
+                ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Loading Bar */}
             <div className="w-full space-y-3">
