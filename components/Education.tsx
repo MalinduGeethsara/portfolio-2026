@@ -77,9 +77,9 @@ export default function Education() {
   }, []);
 
   return (
-    <section id="education" className="relative z-10 pt-20 pb-32 overflow-hidden" ref={container}>
+    <section id="education" className="relative z-10 pt-16 md:pt-20 pb-24 md:pb-32 overflow-hidden" ref={container}>
       <div className="flex flex-col items-center md:items-start gap-4 mb-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-5xl md:text-7xl font-black text-white">
+        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-white">
           My <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400">Education</span>
         </h2>
       </div>
@@ -102,7 +102,7 @@ export default function Education() {
               }`}
             >
               {/* The Timeline Dot */}
-              <div className="timeline-dot absolute left-0 md:left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#0a0a0a] border-4 border-[#00ff99] rounded-full z-10 shadow-[0_0_20px_rgba(0,255,153,0.8)]" />
+              <div className="timeline-dot absolute left-6 md:left-1/2 transform -translate-x-1/2 w-6 h-6 bg-[#0a0a0a] border-4 border-[#00ff99] rounded-full z-10 shadow-[0_0_20px_rgba(0,255,153,0.8)]" />
 
               <div className="w-full md:w-[45%] pl-16 md:pl-0">
                 <div className="glass-card p-8 md:p-10 glass border border-white/10 rounded-3xl hover:border-[#00ff99]/50 transition-all duration-500 group relative overflow-hidden">

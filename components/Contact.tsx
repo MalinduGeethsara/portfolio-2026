@@ -71,7 +71,7 @@ export default function Contact() {
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-80 mix-blend-screen">
         
         {/* Animated SVG Circle */}
-        <div className="absolute w-[500px] h-[500px] md:w-[800px] md:h-[800px] opacity-30">
+        <div className="absolute w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[800px] md:h-[800px] opacity-30">
           <motion.svg
             className="w-full h-full pointer-events-none"
             fill="transparent"
@@ -117,7 +117,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-5xl md:text-7xl font-black text-white"
+          className="text-4xl md:text-5xl lg:text-7xl font-black text-white"
         >
           Let's <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400">Connect</span>
         </motion.h2>
@@ -180,7 +180,7 @@ export default function Contact() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full bg-[#0a0a0a]/80 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#00ff99] focus:ring-1 focus:ring-[#00ff99] transition-all"
+                    className="w-full bg-[#0a0a0a]/80 border border-white/10 rounded-2xl px-4 py-3 md:px-6 md:py-4 text-white focus:outline-none focus:border-[#00ff99] focus:ring-1 focus:ring-[#00ff99] transition-all"
                     placeholder="John Doe"
                   />
                 </div>
@@ -192,7 +192,7 @@ export default function Contact() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-[#0a0a0a]/80 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#00ff99] focus:ring-1 focus:ring-[#00ff99] transition-all"
+                    className="w-full bg-[#0a0a0a]/80 border border-white/10 rounded-2xl px-4 py-3 md:px-6 md:py-4 text-white focus:outline-none focus:border-[#00ff99] focus:ring-1 focus:ring-[#00ff99] transition-all"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -206,7 +206,7 @@ export default function Contact() {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full bg-[#0a0a0a]/80 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#00ff99] focus:ring-1 focus:ring-[#00ff99] transition-all resize-none"
+                  className="w-full bg-[#0a0a0a]/80 border border-white/10 rounded-2xl px-4 py-3 md:px-6 md:py-4 text-white focus:outline-none focus:border-[#00ff99] focus:ring-1 focus:ring-[#00ff99] transition-all resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>

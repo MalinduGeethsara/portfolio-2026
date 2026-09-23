@@ -116,7 +116,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={ref} id="home" className="min-h-screen relative flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
+    <section ref={ref} id="home" className="min-h-screen relative flex flex-col items-center justify-center py-12 md:py-20 px-6 overflow-hidden">
       <motion.div
         style={{ opacity }}
         className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between z-10 origin-top pt-12 md:pt-0"
@@ -131,7 +131,7 @@ export default function Hero() {
             <ScrambleText text="Software Developer" delay={400} />
           </motion.span>
 
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
+          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
             <ScrambleText text="Hello I'm" delay={800} /> <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400 drop-shadow-[0_0_15px_rgba(0,255,153,0.3)] inline-block">
               <ScrambleText text="Malindu Geethsara" delay={1400} />
@@ -177,7 +177,7 @@ export default function Hero() {
         </motion.div>
 
         <div className="w-full md:w-1/2 flex justify-center items-center order-1 md:order-2 mb-12 md:mb-0 relative">
-          <div className="magnetic relative w-[280px] h-[280px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px] group cursor-none">
+          <div className="magnetic relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px] group cursor-none">
 
             {/* Ambient Profile Glow */}
             <div className="absolute inset-0 bg-[#00ff99]/20 blur-[40px] rounded-full mix-blend-screen group-hover:bg-[#00ff99]/40 transition-colors duration-500" />
