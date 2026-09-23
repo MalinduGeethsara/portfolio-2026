@@ -152,9 +152,9 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 px-6 relative">
+    <section id="projects" className="py-16 md:py-24 px-6 relative">
       <div className="flex flex-col gap-4 mb-12">
-        <h2 className="text-4xl font-bold text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
           Featured <span className="text-[#00ff99]">Projects</span>
         </h2>
         <div className="w-20 h-1.5 bg-[#00ff99] rounded-full"></div>
@@ -192,7 +192,7 @@ export default function Projects() {
               </button>
 
               {/* Holographic 3D Display (Left Side) */}
-              <div className="w-full md:w-1/2 bg-[#0a0a0a] min-h-[250px] md:min-h-[400px] lg:min-h-full flex items-center justify-center p-4 md:p-8 relative overflow-hidden" style={{ perspective: 1200 }}>
+              <div className="w-full md:w-1/2 bg-[#0a0a0a] min-h-[200px] md:min-h-[400px] lg:min-h-full flex items-center justify-center p-4 md:p-8 relative overflow-hidden" style={{ perspective: 1200 }}>
                 {/* Background grid */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30" />
                 
