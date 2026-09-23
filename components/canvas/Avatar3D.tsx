@@ -7,16 +7,26 @@ import * as THREE from 'three';
 
 const EmojiAvatar = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const scroll = useRef(0);
   
   useFrame((state) => {
+    // Smooth scroll tracking
+    const currentScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    const targetScroll = currentScrollY * 0.002;
+    scroll.current = THREE.MathUtils.lerp(scroll.current, targetScroll, 0.1);
+
     if (groupRef.current) {
-      // Calculate target rotation based on mouse pointer
-      const targetX = state.pointer.x * 0.5; // Look left/right
-      const targetY = state.pointer.y * 0.5; // Look up/down
+      // Calculate target rotation based on mouse pointer AND scroll
+      const targetX = state.pointer.x * 0.5 + scroll.current * Math.PI; // Spin as you scroll
+      const targetY = state.pointer.y * 0.5; 
 
       // Lerp current rotation to target rotation
       groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetX, 0.1);
       groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -targetY, 0.1);
+      
+      // Add parallax translation based on scroll
+      groupRef.current.position.y = -scroll.current * 1.5;
+      groupRef.current.position.z = scroll.current * 1.5; // Move back slightly as you scroll
     }
   });
 
@@ -66,15 +76,24 @@ const EmojiAvatar = () => {
 // --------------------------------------------------------
 const PersonalAvatar = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const scroll = useRef(0);
   // Using the uploaded white_mesh.glb
   const { scene } = useGLTF('/white_mesh.glb');
   
   useFrame((state) => {
+    const currentScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    const targetScroll = currentScrollY * 0.002;
+    scroll.current = THREE.MathUtils.lerp(scroll.current, targetScroll, 0.1);
+
     if (groupRef.current) {
-      const targetX = state.pointer.x * 0.5;
+      const targetX = state.pointer.x * 0.5 + scroll.current * Math.PI;
       const targetY = state.pointer.y * 0.5;
+      
       groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetX, 0.1);
       groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -targetY, 0.1);
+      
+      groupRef.current.position.y = -scroll.current * 1.5;
+      groupRef.current.position.z = scroll.current * 1.5;
     }
   });
 

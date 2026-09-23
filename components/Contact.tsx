@@ -1,27 +1,118 @@
 'use client';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+
+const EarthGlobe = () => {
+  const meshRef = useRef<THREE.Points>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.05;
+      meshRef.current.rotation.z = state.clock.elapsedTime * 0.02;
+    }
+  });
+
+  return (
+    <points ref={meshRef}>
+      <icosahedronGeometry args={[2.8, 16]} />
+      <pointsMaterial color="#00ff99" size={0.015} transparent opacity={0.4} />
+    </points>
+  );
+};
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thanks for your message! I'll get back to you soon.");
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "YOUR_ACCESS_KEY_HERE", // Replace with your Web3Forms access key
+          ...formData,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    }
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden z-10">
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00ff99]/10 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/5 blur-[150px] rounded-full pointer-events-none" />
+    <section id="contact" className="py-24 relative overflow-hidden z-10 min-h-screen flex flex-col justify-center">
+      {/* 3D Background Globe & Circle Animation */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-80 mix-blend-screen">
+        
+        {/* Animated SVG Circle */}
+        <div className="absolute w-[500px] h-[500px] md:w-[800px] md:h-[800px] opacity-30">
+          <motion.svg
+            className="w-full h-full pointer-events-none"
+            fill="transparent"
+            viewBox="0 0 506 506"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <motion.circle
+              cx="253"
+              cy="253"
+              r="250"
+              stroke="url(#gradient-contact)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ strokeDasharray: "24 10 0 0" }}
+              animate={{
+                strokeDasharray: ["15 120 25 25", "16 25 92 72", "4 250 22 22"],
+                rotate: [120, 360],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            />
+            <defs>
+              <linearGradient id="gradient-contact" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#00ff99" />
+                <stop offset="100%" stopColor="#14b8a6" />
+              </linearGradient>
+            </defs>
+          </motion.svg>
+        </div>
 
-      <div className="flex flex-col items-center md:items-start gap-4 mb-16 px-6 max-w-7xl mx-auto">
+        {/* 3D Globe - Camera pulled back so it renders as a full circle without getting cut off */}
+        <Canvas camera={{ position: [0, 0, 9], fov: 45 }} className="absolute inset-0">
+          <EarthGlobe />
+        </Canvas>
+      </div>
+
+      <div className="flex flex-col items-center md:items-start gap-4 mb-16 px-6 max-w-7xl mx-auto relative z-10 w-full">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -32,7 +123,7 @@ export default function Contact() {
         </motion.h2>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12">
           
           <motion.div 
@@ -47,23 +138,26 @@ export default function Contact() {
 
             <div className="space-y-6">
               {[
-                { icon: <FiMail />, title: "Email", info: "gamalindu12345@gmail.com" },
-                { icon: <FiPhone />, title: "Phone", info: "0713307710" },
-                { icon: <FiMapPin />, title: "Location", info: "Suhanda Motors New Road, Walasmulla" },
+                { icon: <FiMail />, title: "Email", info: "gamalindu12345@gmail.com", href: "mailto:gamalindu12345@gmail.com" },
+                { icon: <FiPhone />, title: "Phone", info: "0713307710", href: "tel:+94713307710" },
+                { icon: <FiMapPin />, title: "Location", info: "Suhanda Motors New Road, Walasmulla", href: "https://maps.google.com/?q=Suhanda+Motors+New+Road,+Walasmulla" },
               ].map((item, i) => (
-                <motion.div 
+                <motion.a 
+                  href={item.href}
+                  target={item.title === "Location" ? "_blank" : undefined}
+                  rel={item.title === "Location" ? "noopener noreferrer" : undefined}
                   key={i}
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center gap-6 group cursor-pointer"
                 >
-                  <div className="w-16 h-16 bg-black/50 border border-white/10 rounded-2xl flex items-center justify-center text-[#00ff99] text-2xl group-hover:bg-[#00ff99] group-hover:text-black transition-all duration-300 shadow-lg">
+                  <div className="w-16 h-16 bg-black/50 backdrop-blur-md border border-white/10 rounded-2xl flex items-center justify-center text-[#00ff99] text-2xl group-hover:bg-[#00ff99] group-hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                     {item.icon}
                   </div>
                   <div>
                     <h4 className="text-white/50 text-sm font-medium mb-1">{item.title}</h4>
                     <p className="text-white font-bold text-lg group-hover:text-[#00ff99] transition-colors">{item.info}</p>
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
           </motion.div>
@@ -74,7 +168,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="w-full lg:w-2/3"
           >
-            <form onSubmit={handleSubmit} className="glass p-8 md:p-12 rounded-3xl space-y-6 relative overflow-hidden border border-white/10">
+            <form onSubmit={handleSubmit} className="bg-[#232329]/60 backdrop-blur-xl p-8 md:p-12 rounded-3xl space-y-6 relative overflow-hidden border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
               <div className="absolute inset-0 bg-linear-to-br from-[#00ff99]/5 to-transparent pointer-events-none" />
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
@@ -121,10 +215,18 @@ export default function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="relative z-10 w-full md:w-auto bg-linear-to-r from-[#00ff99] to-teal-400 text-black font-black px-10 py-4 rounded-2xl flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(0,255,153,0.4)] transition-shadow cursor-pointer"
+                disabled={isSubmitting}
+                className="relative z-10 w-full md:w-auto bg-linear-to-r from-[#00ff99] to-teal-400 text-black font-black px-10 py-4 rounded-2xl flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(0,255,153,0.4)] transition-shadow cursor-pointer disabled:opacity-50"
               >
-                Send Message <FiSend />
+                {isSubmitting ? 'Sending...' : 'Send Message'} <FiSend className={isSubmitting ? "animate-pulse" : ""} />
               </motion.button>
+
+              {submitStatus === 'success' && (
+                <p className="text-[#00ff99] text-sm mt-4 font-bold relative z-10">Message sent successfully! I'll get back to you soon.</p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-red-500 text-sm mt-4 font-bold relative z-10">Something went wrong. Please check your Access Key or email me directly.</p>
+              )}
             </form>
           </motion.div>
 

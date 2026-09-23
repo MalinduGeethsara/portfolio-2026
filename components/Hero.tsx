@@ -6,7 +6,7 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 const Avatar3D = dynamic(() => import('./canvas/Avatar3D'), { ssr: false });
 import { FiArrowDown } from 'react-icons/fi';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -34,6 +34,60 @@ const itemVariants = {
   }
 };
 
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*";
+
+const ScrambleText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
+  const [displayText, setDisplayText] = useState(text);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    // Initial scramble on mount to avoid hydration mismatch
+    setDisplayText(
+      text.split("").map((c) => (c === " " || c === "'" ? c : letters[Math.floor(Math.random() * letters.length)])).join("")
+    );
+  }, [text]);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
+    let iteration = 0;
+    let interval: NodeJS.Timeout;
+
+    const startAnimation = () => {
+      interval = setInterval(() => {
+        setDisplayText(
+          text
+            .split("")
+            .map((letter, index) => {
+              if (index < iteration) {
+                return text[index];
+              }
+              if (letter === " " || letter === "'") return letter;
+              return letters[Math.floor(Math.random() * letters.length)];
+            })
+            .join("")
+        );
+
+        if (iteration >= text.length) {
+          clearInterval(interval);
+        }
+
+        iteration += 1 / 4; // Smoothness factor (slower reveal)
+      }, 35); // Update frequency
+    };
+
+    const timeout = setTimeout(startAnimation, delay);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [text, delay, isMounted]);
+
+  return <>{isMounted ? displayText : text}</>;
+};
+
 export default function Hero() {
   const ref = useRef(null);
   const scrollTextRef = useRef(null);
@@ -43,11 +97,8 @@ export default function Hero() {
     offset: ["start start", "end start"]
   });
 
-  // Parallax exit animations
-  // Removed yPos and scale because they cause layout shifts that desync the 3D canvas dimensions when scrolling back up
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  // GSAP Background Marquee Scroll Effect
   useEffect(() => {
     let ctx = gsap.context(() => {
       gsap.to(scrollTextRef.current, {
@@ -57,7 +108,7 @@ export default function Hero() {
           trigger: document.body,
           start: "top top",
           end: "bottom top",
-          scrub: 1.5 // Smooth scrubbing lag
+          scrub: 1.5 
         }
       });
     }, ref);
@@ -66,9 +117,6 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="home" className="min-h-screen relative flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
-
-
-
       <motion.div
         style={{ opacity }}
         className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between z-10 origin-top pt-12 md:pt-0"
@@ -80,13 +128,13 @@ export default function Hero() {
           animate="visible"
         >
           <motion.span variants={itemVariants} className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm md:text-md tracking-widest uppercase text-[#00ff99] font-bold shadow-[0_0_15px_rgba(0,255,153,0.1)]">
-            Software Developer
+            <ScrambleText text="Software Developer" delay={400} />
           </motion.span>
 
           <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
-            Hello I'm <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400 drop-shadow-[0_0_15px_rgba(0,255,153,0.3)]">
-              Malindu Geethsara
+            <ScrambleText text="Hello I'm" delay={800} /> <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400 drop-shadow-[0_0_15px_rgba(0,255,153,0.3)] inline-block">
+              <ScrambleText text="Malindu Geethsara" delay={1400} />
             </span>
           </motion.h1>
 
