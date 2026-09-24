@@ -89,7 +89,7 @@ export default function Education() {
         {/* GSAP ScrollTrigger Line */}
         <div 
           ref={lineRef}
-          className="absolute left-6 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-[#00ff99] to-teal-900 shadow-[0_0_15px_#00ff99]" 
+          className="absolute left-12 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-[#00ff99] to-teal-900 shadow-[0_0_15px_#00ff99]" 
         />
 
         <div className="space-y-24">

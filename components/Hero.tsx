@@ -34,58 +34,29 @@ const itemVariants = {
   }
 };
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*";
-
-const ScrambleText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
-  const [displayText, setDisplayText] = useState(text);
-  const [isMounted, setIsMounted] = useState(false);
-
+const TypewriterText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
+  const [displayText, setDisplayText] = useState("");
+  
   useEffect(() => {
-    setIsMounted(true);
-    // Initial scramble on mount to avoid hydration mismatch
-    setDisplayText(
-      text.split("").map((c) => (c === " " || c === "'" ? c : letters[Math.floor(Math.random() * letters.length)])).join("")
-    );
-  }, [text]);
-
-  useEffect(() => {
-    if (!isMounted) return;
-
-    let iteration = 0;
-    let interval: NodeJS.Timeout;
-
-    const startAnimation = () => {
-      interval = setInterval(() => {
-        setDisplayText(
-          text
-            .split("")
-            .map((letter, index) => {
-              if (index < iteration) {
-                return text[index];
-              }
-              if (letter === " " || letter === "'") return letter;
-              return letters[Math.floor(Math.random() * letters.length)];
-            })
-            .join("")
-        );
-
-        if (iteration >= text.length) {
+    let timeout: NodeJS.Timeout;
+    
+    const startTyping = () => {
+      let currentIndex = 0;
+      const interval = setInterval(() => {
+        currentIndex++;
+        setDisplayText(text.slice(0, currentIndex));
+        if (currentIndex >= text.length) {
           clearInterval(interval);
         }
-
-        iteration += 1 / 4; // Smoothness factor (slower reveal)
-      }, 35); // Update frequency
+      }, 40);
+      return () => clearInterval(interval);
     };
+    
+    timeout = setTimeout(startTyping, delay);
+    return () => clearTimeout(timeout);
+  }, [text, delay]);
 
-    const timeout = setTimeout(startAnimation, delay);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [text, delay, isMounted]);
-
-  return <>{isMounted ? displayText : text}</>;
+  return <>{displayText}</>;
 };
 
 export default function Hero() {
@@ -128,18 +99,18 @@ export default function Hero() {
           animate="visible"
         >
           <motion.span variants={itemVariants} className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm md:text-md tracking-widest uppercase text-[#00ff99] font-bold shadow-[0_0_15px_rgba(0,255,153,0.1)]">
-            <ScrambleText text="Software Developer" delay={400} />
+            <TypewriterText text="Full-Stack Developer" delay={400} />
           </motion.span>
 
           <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
-            <ScrambleText text="Hello I'm" delay={800} /> <br />
+            <TypewriterText text="Hello I'm" delay={1200} /> <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400 drop-shadow-[0_0_15px_rgba(0,255,153,0.3)] inline-block">
-              <ScrambleText text="Malindu Geethsara" delay={1400} />
+              <TypewriterText text="Malindu Geethsara" delay={2000} />
             </span>
           </motion.h1>
 
           <motion.p variants={itemVariants} className="text-white/60 text-base md:text-lg max-w-lg leading-relaxed mx-auto md:mx-0">
-            Highly adaptable and dedicated developer specializing in building impactful, intuitive applications. Passionate about lifelong professional development and collective effort to produce innovative outcomes.
+            Passionate Full-Stack Developer specializing in crafting robust, scalable web applications from front to back. Dedicated to creating seamless user experiences, optimizing backend performance, and continuously exploring modern technologies to build impactful digital solutions.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-center justify-center md:justify-start pt-6">

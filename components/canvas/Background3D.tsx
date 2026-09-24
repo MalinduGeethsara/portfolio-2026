@@ -1,17 +1,31 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Galaxy = () => {
+const useScrollTracker = () => {
+  const scrollY = useRef(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      scrollY.current = window.scrollY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  return scrollY;
+};
+
+const Galaxy = ({ isMobile }: { isMobile: boolean }) => {
   const pointsRef = useRef<THREE.Points>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const scroll = useRef(0);
+  const globalScroll = useScrollTracker();
 
   const parameters = useMemo(() => ({
-    count: 25000,
-    size: 0.02,
+    count: isMobile ? 8000 : 25000,
+    size: isMobile ? 0.03 : 0.02,
     radius: 12,
     branches: 5,
     spin: 1.5,
@@ -59,8 +73,7 @@ const Galaxy = () => {
     mouse.current.y = THREE.MathUtils.lerp(mouse.current.y, state.pointer.y, 0.05);
     
     // Smooth scroll tracking
-    const currentScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-    const targetScroll = currentScrollY * 0.001; 
+    const targetScroll = globalScroll.current * 0.001; 
     scroll.current = THREE.MathUtils.lerp(scroll.current, targetScroll, 0.05);
 
     if (pointsRef.current) {
@@ -97,11 +110,12 @@ const Galaxy = () => {
   );
 };
 
-const Starfield = () => {
+const Starfield = ({ isMobile }: { isMobile: boolean }) => {
   const pointsRef = useRef<THREE.Points>(null);
   const scroll = useRef(0);
+  const globalScroll = useScrollTracker();
   
-  const particlesCount = 4000;
+  const particlesCount = isMobile ? 1500 : 4000;
   const positions = useMemo(() => {
     const pos = new Float32Array(particlesCount * 3);
     for (let i = 0; i < particlesCount * 3; i++) {
@@ -111,8 +125,7 @@ const Starfield = () => {
   }, []);
 
   useFrame((state) => {
-    const currentScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-    const targetScroll = currentScrollY * 0.001; 
+    const targetScroll = globalScroll.current * 0.001; 
     scroll.current = THREE.MathUtils.lerp(scroll.current, targetScroll, 0.05);
 
     if (pointsRef.current) {
@@ -139,13 +152,22 @@ const Starfield = () => {
 }
 
 export default function Background3D() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="fixed inset-0 z-[-1] bg-[#0a0a0a] pointer-events-none">
-      <Canvas camera={{ position: [0, 2, 12], fov: 60 }}>
+      <Canvas camera={{ position: [0, 2, 12], fov: 60 }} dpr={[1, 1.5]} performance={{ min: 0.5 }}>
         <fog attach="fog" args={['#0a0a0a', 5, 25]} />
         <ambientLight intensity={0.5} />
-        <Galaxy />
-        <Starfield />
+        <Galaxy isMobile={isMobile} />
+        <Starfield isMobile={isMobile} />
       </Canvas>
       {/* Heavy noise overlay to blend 3D with the 2D UI seamlessly */}
       <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
