@@ -105,7 +105,8 @@ export default function Hero() {
           <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
             <TypewriterText text="Hello I'm" delay={1200} /> <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400 drop-shadow-[0_0_15px_rgba(0,255,153,0.3)] inline-block">
-              <TypewriterText text="Malindu Geethsara" delay={2000} />
+              <TypewriterText text="Malindu" delay={2000} /> <br />
+              <TypewriterText text="Geethsara" delay={2400} />
             </span>
           </motion.h1>
 
