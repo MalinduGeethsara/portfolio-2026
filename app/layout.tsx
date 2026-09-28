@@ -5,9 +5,7 @@ import SmoothScroll from '../components/SmoothScroll';
 import MagneticCursor from '../components/MagneticCursor';
 import BackgroundWrapper from '../components/BackgroundWrapper';
 import Preloader from '../components/Preloader';
-
 const inter = Inter({ subsets: ['latin'] });
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

@@ -3,17 +3,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
-
 const Avatar3D = dynamic(() => import('./canvas/Avatar3D'), { ssr: false });
 import { FiArrowDown } from 'react-icons/fi';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -24,7 +21,6 @@ const containerVariants = {
     }
   }
 };
-
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -33,13 +29,10 @@ const itemVariants = {
     transition: { type: "spring" as const, stiffness: 100 }
   }
 };
-
 const TypewriterText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
   const [displayText, setDisplayText] = useState("");
-  
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    
     const startTyping = () => {
       let currentIndex = 0;
       const interval = setInterval(() => {
@@ -51,25 +44,19 @@ const TypewriterText = ({ text, delay = 0 }: { text: string, delay?: number }) =
       }, 40);
       return () => clearInterval(interval);
     };
-    
     timeout = setTimeout(startTyping, delay);
     return () => clearTimeout(timeout);
   }, [text, delay]);
-
   return <>{displayText}</>;
 };
-
 export default function Hero() {
   const ref = useRef(null);
   const scrollTextRef = useRef(null);
-
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
   });
-
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
   useEffect(() => {
     let ctx = gsap.context(() => {
       gsap.to(scrollTextRef.current, {
@@ -85,7 +72,6 @@ export default function Hero() {
     }, ref);
     return () => ctx.revert();
   }, []);
-
   return (
     <section ref={ref} id="home" className="min-h-screen relative flex flex-col items-center justify-center py-12 md:py-20 px-6 overflow-hidden">
       <motion.div
@@ -101,7 +87,6 @@ export default function Hero() {
           <motion.span variants={itemVariants} className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm md:text-md tracking-widest uppercase text-[#00ff99] font-bold shadow-[0_0_15px_rgba(0,255,153,0.1)]">
             <TypewriterText text="Full Stack Developer" delay={400} />
           </motion.span>
-
           <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
             <TypewriterText text="Hello I'm" delay={1200} /> <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400 drop-shadow-[0_0_15px_rgba(0,255,153,0.3)] inline-block">
@@ -109,11 +94,9 @@ export default function Hero() {
               <TypewriterText text="Geethsara" delay={2400} />
             </span>
           </motion.h1>
-
           <motion.p variants={itemVariants} className="text-white/60 text-base md:text-lg max-w-lg leading-relaxed mx-auto md:mx-0">
             Passionate Full-Stack Developer specializing in crafting robust, scalable web applications from front to back. Dedicated to creating seamless user experiences, optimizing backend performance, and continuously exploring modern technologies to build impactful digital solutions.
           </motion.p>
-
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-center justify-center md:justify-start pt-6">
             <motion.a
               href="/MALINDU_GEETHSARA_CV.pdf"
@@ -126,7 +109,6 @@ export default function Hero() {
               <span className="relative group-hover:text-black transition-colors duration-300">DOWNLOAD CV</span>
               <span className="relative group-hover:text-black transition-colors duration-300 group-hover:translate-y-1 inline-block">↓</span>
             </motion.a>
-
             <div className="flex gap-4">
               {[
                 { icon: FaGithub, href: "https://github.com/MalinduGeethsara" },
@@ -147,13 +129,8 @@ export default function Hero() {
             </div>
           </motion.div>
         </motion.div>
-
         <div className="w-full md:w-1/2 flex justify-center items-center order-1 md:order-2 mb-12 md:mb-0 relative">
-          <div className="magnetic relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px] group cursor-none">
-
-            {/* Ambient Profile Glow */}
-            <div className="absolute inset-0 bg-[#00ff99]/20 blur-[40px] rounded-full mix-blend-screen group-hover:bg-[#00ff99]/40 transition-colors duration-500" />
-
+          <div className="magnetic relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px] group cursor-none"><div className="absolute inset-0 bg-[#00ff99]/20 blur-[40px] rounded-full mix-blend-screen group-hover:bg-[#00ff99]/40 transition-colors duration-500" />
             <motion.svg
               className="absolute inset-0 w-full h-full pointer-events-none"
               fill="transparent"
@@ -186,7 +163,6 @@ export default function Hero() {
                 </linearGradient>
               </defs>
             </motion.svg>
-
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -198,7 +174,6 @@ export default function Hero() {
           </div>
         </div>
       </motion.div>
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

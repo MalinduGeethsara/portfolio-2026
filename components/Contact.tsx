@@ -4,17 +4,14 @@ import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
 import { useState, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-
 const EarthGlobe = () => {
   const meshRef = useRef<THREE.Points>(null);
-
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.05;
       meshRef.current.rotation.z = state.clock.elapsedTime * 0.02;
     }
   });
-
   return (
     <points ref={meshRef}>
       <icosahedronGeometry args={[2.8, 16]} />
@@ -22,21 +19,17 @@ const EarthGlobe = () => {
     </points>
   );
 };
-
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
-
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -49,7 +42,6 @@ export default function Contact() {
           ...formData,
         }),
       });
-
       const result = await response.json();
       if (result.success) {
         setSubmitStatus('success');
@@ -64,14 +56,8 @@ export default function Contact() {
       setTimeout(() => setSubmitStatus('idle'), 5000);
     }
   };
-
   return (
-    <section id="contact" className="py-24 relative overflow-hidden z-10 min-h-screen flex flex-col justify-center">
-      {/* 3D Background Globe & Circle Animation */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-80 mix-blend-screen">
-        
-        {/* Animated SVG Circle */}
-        <div className="absolute w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[800px] md:h-[800px] opacity-30">
+    <section id="contact" className="py-24 relative overflow-hidden z-10 min-h-screen flex flex-col justify-center"><div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-80 mix-blend-screen"><div className="absolute w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[800px] md:h-[800px] opacity-30">
           <motion.svg
             className="w-full h-full pointer-events-none"
             fill="transparent"
@@ -104,14 +90,10 @@ export default function Contact() {
               </linearGradient>
             </defs>
           </motion.svg>
-        </div>
-
-        {/* 3D Globe - Camera pulled back so it renders as a full circle without getting cut off */}
-        <Canvas camera={{ position: [0, 0, 9], fov: 45 }} className="absolute inset-0">
+        </div><Canvas camera={{ position: [0, 0, 9], fov: 45 }} className="absolute inset-0">
           <EarthGlobe />
         </Canvas>
       </div>
-
       <div className="flex flex-col items-center md:items-start gap-4 mb-16 px-6 max-w-7xl mx-auto relative z-10 w-full">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -122,10 +104,8 @@ export default function Contact() {
           Let's <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00ff99] to-teal-400">Connect</span>
         </motion.h2>
       </div>
-
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12">
-          
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -135,7 +115,6 @@ export default function Contact() {
             <p className="text-white/70 text-lg leading-relaxed mb-8">
               I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Let's create something amazing!
             </p>
-
             <div className="space-y-6">
               {[
                 { icon: <FiMail />, title: "Email", info: "gamalindu12345@gmail.com", href: "mailto:gamalindu12345@gmail.com" },
@@ -161,7 +140,6 @@ export default function Contact() {
               ))}
             </div>
           </motion.div>
-
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -170,7 +148,6 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="bg-[#232329]/60 backdrop-blur-xl p-8 md:p-12 rounded-3xl space-y-6 relative overflow-hidden border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
               <div className="absolute inset-0 bg-linear-to-br from-[#00ff99]/5 to-transparent pointer-events-none" />
-              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-white/60 ml-2">Your Name</label>
@@ -197,7 +174,6 @@ export default function Contact() {
                   />
                 </div>
               </div>
-
               <div className="space-y-2 relative z-10">
                 <label className="text-sm font-bold text-white/60 ml-2">Message</label>
                 <textarea 
@@ -210,7 +186,6 @@ export default function Contact() {
                   placeholder="Tell me about your project..."
                 />
               </div>
-
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -220,7 +195,6 @@ export default function Contact() {
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'} <FiSend className={isSubmitting ? "animate-pulse" : ""} />
               </motion.button>
-
               {submitStatus === 'success' && (
                 <p className="text-[#00ff99] text-sm mt-4 font-bold relative z-10">Message sent successfully! I'll get back to you soon.</p>
               )}
@@ -229,7 +203,6 @@ export default function Contact() {
               )}
             </form>
           </motion.div>
-
         </div>
       </div>
     </section>

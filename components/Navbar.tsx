@@ -1,15 +1,11 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
-
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => setIsOpen(!isOpen);
-
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-5">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -35,7 +31,6 @@ export default function Navbar() {
             ))}
           </ul>
         </div>
-
         <div className="md:hidden">
             <button onClick={toggleMenu} className="text-3xl text-[#00ff99]">
                 {isOpen ? <FiX /> : <FiMenu />}
