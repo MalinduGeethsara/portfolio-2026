@@ -4,27 +4,24 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import { useRef } from 'react';
 import * as THREE from 'three';
-
 const SpinningShape = ({ type }: { type: string }) => {
   const meshRef = useRef<THREE.Group>(null);
-
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x = state.clock.elapsedTime * 0.3;
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.5;
     }
   });
-
   const getPlanet = () => {
     switch (type) {
-      case "Programming": // Standard Wireframe Planet
+      case "Programming":
         return (
           <mesh>
             <sphereGeometry args={[1.2, 12, 12]} />
             <meshStandardMaterial color="#00ff99" wireframe={true} transparent opacity={0.8} emissive="#00ff99" emissiveIntensity={0.2} />
           </mesh>
         );
-      case "Full-Stack": // Combined Geodesic Ringed Planet
+      case "Full-Stack":
         return (
           <group>
             <mesh>
@@ -37,14 +34,14 @@ const SpinningShape = ({ type }: { type: string }) => {
             </mesh>
           </group>
         );
-      case "Tools": // Blocky Tech Planet
+      case "Tools":
         return (
           <mesh>
             <dodecahedronGeometry args={[1.2, 0]} />
             <meshStandardMaterial color="#00ff99" wireframe={true} transparent opacity={0.8} emissive="#00ff99" emissiveIntensity={0.2} />
           </mesh>
         );
-      case "Databases": // Cylinder for Database
+      case "Databases":
         return (
           <mesh>
             <cylinderGeometry args={[0.9, 0.9, 1.4, 16, 4]} />
@@ -60,7 +57,6 @@ const SpinningShape = ({ type }: { type: string }) => {
         );
     }
   };
-
   return (
     <Float speed={2.5} rotationIntensity={1.5} floatIntensity={2}>
       <group ref={meshRef}>
@@ -69,7 +65,6 @@ const SpinningShape = ({ type }: { type: string }) => {
     </Float>
   );
 };
-
 const SkillIcon3D = ({ title }: { title: string }) => {
   return (
     <div className="w-14 h-14 relative z-10 pointer-events-none">
@@ -81,7 +76,6 @@ const SkillIcon3D = ({ title }: { title: string }) => {
     </div>
   );
 };
-
 export default function Skills() {
   const skillCategories = [
     {
@@ -101,7 +95,6 @@ export default function Skills() {
       items: ["Git", "Jira", "Figma"]
     }
   ];
-
   return (
     <section id="skills" className="py-16 md:py-24 px-6">
       <div className="flex flex-col gap-4 mb-12">
@@ -110,7 +103,6 @@ export default function Skills() {
         </h2>
         <div className="w-20 h-1.5 bg-[#00ff99] rounded-full"></div>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {skillCategories.map((cat, i) => (
           <motion.div
@@ -127,7 +119,6 @@ export default function Skills() {
               </div>
               <h3 className="font-bold text-white text-lg">{cat.title}</h3>
             </div>
-
             <ul className="flex flex-wrap gap-2">
               {cat.items.map((skill, j) => (
                 <li 
