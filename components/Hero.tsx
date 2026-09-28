@@ -99,7 +99,7 @@ export default function Hero() {
           animate="visible"
         >
           <motion.span variants={itemVariants} className="inline-block px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm md:text-md tracking-widest uppercase text-[#00ff99] font-bold shadow-[0_0_15px_rgba(0,255,153,0.1)]">
-            <TypewriterText text="Full-Stack Developer" delay={400} />
+            <TypewriterText text="Full Stack Developer" delay={400} />
           </motion.span>
 
           <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white">
