@@ -24,11 +24,11 @@ const SpinningShape = ({ type }: { type: string }) => {
             <meshStandardMaterial color="#00ff99" wireframe={true} transparent opacity={0.8} emissive="#00ff99" emissiveIntensity={0.2} />
           </mesh>
         );
-      case "Frontend": // Ringed Planet (Saturn-like)
+      case "Full-Stack": // Combined Geodesic Ringed Planet
         return (
           <group>
             <mesh>
-              <sphereGeometry args={[0.8, 10, 10]} />
+              <icosahedronGeometry args={[0.9, 2]} />
               <meshStandardMaterial color="#00ff99" wireframe={true} transparent opacity={0.8} emissive="#00ff99" emissiveIntensity={0.2} />
             </mesh>
             <mesh rotation-x={Math.PI / 2.2}>
@@ -37,17 +37,17 @@ const SpinningShape = ({ type }: { type: string }) => {
             </mesh>
           </group>
         );
-      case "Backend": // Digital Geodesic Planet
-        return (
-          <mesh>
-            <icosahedronGeometry args={[1.2, 2]} />
-            <meshStandardMaterial color="#00ff99" wireframe={true} transparent opacity={0.6} emissive="#00ff99" emissiveIntensity={0.2} />
-          </mesh>
-        );
       case "Tools": // Blocky Tech Planet
         return (
           <mesh>
             <dodecahedronGeometry args={[1.2, 0]} />
+            <meshStandardMaterial color="#00ff99" wireframe={true} transparent opacity={0.8} emissive="#00ff99" emissiveIntensity={0.2} />
+          </mesh>
+        );
+      case "Databases": // Cylinder for Database
+        return (
+          <mesh>
+            <cylinderGeometry args={[0.9, 0.9, 1.4, 16, 4]} />
             <meshStandardMaterial color="#00ff99" wireframe={true} transparent opacity={0.8} emissive="#00ff99" emissiveIntensity={0.2} />
           </mesh>
         );
@@ -86,19 +86,19 @@ export default function Skills() {
   const skillCategories = [
     {
       title: "Programming",
-      items: ["C", "C++", "Java", "JavaScript", "PHP"]
+      items: ["C", "C++", "Java", "JavaScript", "TypeScript", "PHP"]
     },
     {
-      title: "Frontend",
-      items: ["HTML5", "Tailwind CSS", "React", "Next.js", "Figma"]
+      title: "Full-Stack",
+      items: ["HTML5", "Tailwind CSS", "React", "Next.js", "GSAP", "Ant Design Icons", "Node.js", "PHP"]
     },
     {
-      title: "Backend",
-      items: ["Node.js", "Express", "MySQL", "PHP"]
+      title: "Databases",
+      items: ["MySQL", "MongoDB", "Firebase"]
     },
     {
       title: "Tools",
-      items: ["Git", "Jira", "Postman", "Linux"]
+      items: ["Git", "Jira", "Figma"]
     }
   ];
 
